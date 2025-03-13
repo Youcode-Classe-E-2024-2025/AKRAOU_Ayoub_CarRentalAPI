@@ -25,7 +25,7 @@ class CarController extends Controller
             'model' => 'required|string|max:255',
             'year' => 'required|integer|min:1886|max:' . date('Y'),
             'price_per_day' => 'required|numeric|min:0',
-            'status' => 'required|enum:available,rented,maintenance',
+            'status' => 'required|in:available,rented,maintenance',
         ]);
 
         $car = Car::create($request->all());
@@ -50,7 +50,7 @@ class CarController extends Controller
             'model' => 'required|string|max:255',
             'year' => 'required|integer|min:1886|max:' . date('Y'),
             'price_per_day' => 'required|numeric|min:0',
-            'status' => 'required|enum:available,rented,maintenance',
+            'status' => 'required|in:available,rented,maintenance',
         ]);
 
         $car->update($request->all());

@@ -23,7 +23,7 @@ class PaymentController extends Controller
         $request->validate([
             'rental_id' => 'required|exists:rentals,id',
             'amount' => 'required|numeric|min:0',
-            'payment_method' => 'required|string|max:255|enum:credit_card,paypal,bank_transfer',
+            'payment_method' => 'required|string|max:255|in:credit_card,paypal,bank_transfer',
         ]);
 
         $payment = Payment::create($request->all());
@@ -46,7 +46,7 @@ class PaymentController extends Controller
         $request->validate([
             'rental_id' => 'sometimes|required|exists:rentals,id',
             'amount' => 'sometimes|required|numeric|min:0',
-            'payment_method' => 'sometimes|required|string|max:255|enum:credit_card,paypal,bank_transfer',
+            'payment_method' => 'sometimes|required|string|max:255|in:credit_card,paypal,bank_transfer',
         ]);
 
         $payment->update($request->all());
