@@ -18,12 +18,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::middleware('auth:sanctum')->group(function () {
-// });
-Route::apiResource('users', UserController::class);
-Route::apiResource('payments', PaymentController::class);
-Route::apiResource('cars', CarController::class);
-Route::apiResource('rentals', RentalController::class);
-
-Route::post('register', [UserController::class, 'register']);
+Route::middleware('auth:sanctum')->group(function () {
+    Route::apiResource('users', UserController::class);
+    Route::apiResource('payments', PaymentController::class);
+    Route::apiResource('cars', CarController::class);
+    Route::apiResource('rentals', RentalController::class);
+});
 Route::post('login', [UserController::class, 'login'])->name('login');
+Route::post('register', [UserController::class, 'register']);
