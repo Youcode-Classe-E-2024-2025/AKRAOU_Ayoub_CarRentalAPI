@@ -46,11 +46,11 @@ class CarController extends Controller
     public function update(Request $request, Car $car)
     {
         $request->validate([
-            'brand' => 'required|string|max:255',
-            'model' => 'required|string|max:255',
-            'year' => 'required|integer|min:1886|max:' . date('Y'),
-            'price_per_day' => 'required|numeric|min:0',
-            'status' => 'required|in:available,rented,maintenance',
+            'brand' => 'sometimes|required|string|max:255',
+            'model' => 'sometimes|required|string|max:255',
+            'year' => 'sometimes|required|integer|min:1886|max:' . date('Y'),
+            'price_per_day' => 'sometimes|required|numeric|min:0',
+            'status' => 'sometimes|required|in:available,rented,maintenance',
         ]);
 
         $car->update($request->all());
