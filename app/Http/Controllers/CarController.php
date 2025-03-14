@@ -10,11 +10,24 @@ class CarController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return Car::all();
-    }
+        $query = Car::query();
 
+        if ($request->has('search') && !empty($request->search)) {
+            $query->where('brand', 'LIKE', '%' . $request->search . '%')
+                ->orWhere('model', 'LIKE', '%' . $request->search . '%');
+        }
+
+        $sortBy = $request->get('sort', 'created_at');
+        $sortDirection = $request->get('direction', 'desc');
+
+        $query->orderBy($sortBy, $sortDirection);
+
+        $cars = $query->paginate($request->get('per_page', 10));
+
+        return response()->json($cars);
+    }
     /**
      * Store a newly created resource in storage.
      */
